@@ -4,12 +4,10 @@ import com.example.productAPI.entities.Product;
 import com.example.productAPI.exceptions.BadRequestException;
 import com.example.productAPI.mapper.ProductMapper;
 import com.example.productAPI.repositories.ProductRepository;
-import com.example.productAPI.requests.ProductPutRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -17,10 +15,6 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private List<Product> productsList;
-    private List<Product> productsInStock;
-
-
 
 
     public List<Product> findAll() {
@@ -34,11 +28,8 @@ public class ProductService {
     }
 
 
+    @Transactional
     public Product save(Product product) {
-        /*product.setId(ThreadLocalRandom.current().nextLong(3,10000));*/
-       /*if(productsList.stream().anyMatch(prod -> prod.getName().equals(prod.getName()))){
-           throw new sameNameException();
-       }*/
 
         return productRepository.save(ProductMapper.INSTANCE.toProduct(product));
 
@@ -48,13 +39,13 @@ public class ProductService {
         productRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public void replaceProduct(ProductPutRequestBody productPutRequestBody){
-        //delete(product.getId());
-        Product savedProduct = findByIdOrThrowBadRequestException(productPutRequestBody.getId());
-        Product product = ProductMapper.INSTANCE.toProduct(productPutRequestBody);
-        product.setId(savedProduct.getId());
+    public void replaceProduct(Product product){
 
-        productRepository.save(product);
+        Product savedProduct = findByIdOrThrowBadRequestException(product.getId());
+        Product product1 = ProductMapper.INSTANCE.toProduct(product);
+        product1.setId(savedProduct.getId());
+
+        productRepository.save(product1);
     }
 
 

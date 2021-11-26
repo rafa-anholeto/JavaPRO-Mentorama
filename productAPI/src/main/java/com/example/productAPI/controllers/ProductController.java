@@ -1,7 +1,6 @@
 package com.example.productAPI.controllers;
 
 import com.example.productAPI.entities.Product;
-import com.example.productAPI.requests.ProductPutRequestBody;
 import com.example.productAPI.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -42,8 +41,8 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<PostMapping> replaceProduct(@RequestBody ProductPutRequestBody productPutRequestBody){
-        productService.replaceProduct(productPutRequestBody);
+    public ResponseEntity<Product> replaceProduct(@RequestBody Product product){
+        productService.replaceProduct(product);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

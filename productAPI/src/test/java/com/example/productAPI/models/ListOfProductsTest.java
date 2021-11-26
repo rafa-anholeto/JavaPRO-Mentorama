@@ -3,8 +3,6 @@ package com.example.productAPI.models;
 import com.example.productAPI.entities.Product;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ListOfProductsTest {
     private Product product;
 

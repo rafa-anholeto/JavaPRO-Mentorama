@@ -14,9 +14,6 @@ public class OrderItem {
         OrderItem.maxDiscountPercentage = maxDiscountPercentage;
     }
 
-    public double getTotalInventoryQuantity(){
-        return product.getTotalInventoryQuantity(maxInventoryQuantity);
-    }
 
     public  double getPriceWithDiscount() {
         return product.getPriceWithDiscount(maxDiscountPercentage) * maxInventoryQuantity;
