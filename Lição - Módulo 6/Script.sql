@@ -1,3 +1,14 @@
+create table patients(
+id int primary key,
+nome varchar(50),
+telefone varchar(16),
+);
+
+
+alter table patients 
+add column birthdate varchar(12)
+
+
 insert into patients 
 (id, nome, telefone, birthdate)
 values
@@ -6,15 +17,18 @@ values
 (3, 'Joel Silva', '94585-7855', '15/08/1983')
 
 
-alter table patients 
-add column birthdate varchar(12)
-
 select * from patients p 
 
-insert into hospitalization_history 
-(date_and_entry_patient_hour, date_and_exit_patient_hour, description, response_doctor, id_patient)
-values
-('10/11/2016 - 18:40', '10/11/2016 - 20:35', 'Flu problem', 5555, 2);
+
+create table hospitalization_history(
+date_and_entry_patient_hour varchar(50),
+date_and_exit_patient_hour varchar(50),
+description varchar(50),
+id_patient int
+);
+
+alter table hospitalization_history 
+add column response_doctor varchar(50)
 
 
 alter table hospitalization_history 
@@ -22,8 +36,22 @@ add constraint fk_responseDoctor
 foreign key (response_doctor)
 references doctors(matricula)
 
-alter table hospitalization_history 
-add column response_doctor varchar(50)
+insert into hospitalization_history 
+(date_and_entry_patient_hour, date_and_exit_patient_hour, description, response_doctor, id_patient)
+values
+('10/11/2016 - 18:40', '10/11/2016 - 20:35', 'Flu problem', 5555, 2);
+
+
+
+
+create table doctors(
+matricula varchar(50) primary key,
+nome varchar(50),
+department int,
+cargo varchar(50),
+telefone varchar(12)
+);
+
 
 insert into doctors 
 (nome, department, cargo, matricula)
@@ -37,14 +65,6 @@ values
 select * from doctors d 
 
 select * from hospitalization_history hh 
-
-create table doctors(
-matricula varchar(50) primary key,
-nome varchar(50),
-department int,
-cargo varchar(50),
-telefone varchar(12)
-);
 
 
 
