@@ -1,7 +1,7 @@
 create table patients(
 id int primary key,
 nome varchar(50),
-telefone varchar(16),
+telefone varchar(11),
 );
 
 
