@@ -12,20 +12,25 @@ import java.util.List;
 @Table(name = "hospitalization_history")
 public class HospitalizationHistory implements Serializable {
 
-    private String dateAndEntryPatientHour;
-    private String dateAndExitPatientHour;
-    private String description;
     @Id
-    private Long responseDoctor;
     @JoinColumn(name = "idPatient")
     private Long idPatients;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinColumn(name = "idMatricula")
-    private List<Doctors> doctorsList = new ArrayList<>();
+    private String dateAndEntryPatientHour;
+    private String dateAndExitPatientHour;
+    private String description;
 
-    @OneToMany
+    //private Long responseDoctor;
+
+    @ManyToMany
+    @JoinColumn(name = "doctors")
+    private List<Doctors> responseDoctor = new ArrayList<>();
+
+
+
+
+    @ManyToMany
+    @JoinColumn(name = "hospitalization_history_idPatients")
     private List<Patients> patients = new ArrayList<>();
 
 
@@ -36,12 +41,13 @@ public class HospitalizationHistory implements Serializable {
     public HospitalizationHistory() {
     }
 
-    public HospitalizationHistory(String dateAndEntryPatientHour, String dateAndExitPatientHour, String description, Long responseDoctor, Long idPatients) {
+    public HospitalizationHistory(Long idPatients, String dateAndEntryPatientHour, String dateAndExitPatientHour, String description,
+                                  List<Doctors> responseDoctor) {
+        this.idPatients = idPatients;
         this.dateAndEntryPatientHour = dateAndEntryPatientHour;
         this.dateAndExitPatientHour = dateAndExitPatientHour;
         this.description = description;
         this.responseDoctor = responseDoctor;
-        this.idPatients = idPatients;
 
     }
 
@@ -69,21 +75,14 @@ public class HospitalizationHistory implements Serializable {
         this.description = description;
     }
 
-    public Long getResponseDoctor() {
+    /*public Long getResponseDoctor() {
         return responseDoctor;
     }
 
     public void setResponseDoctor(Long responseDoctor) {
         this.responseDoctor = responseDoctor;
-    }
-
-    /*public void setDoctorsList(List<Doctors> doctorsList) {
-        this.doctorsList = doctorsList;
-    }
-
-    public List<Doctors> getDoctorsList() {
-        return doctorsList;
     }*/
+
 
     public Long getIdPatients() {
         return this.idPatients;
@@ -93,4 +92,11 @@ public class HospitalizationHistory implements Serializable {
         this.idPatients = idPatients;
     }
 
+    public List<Doctors> getResponseDoctor() {
+        return responseDoctor;
+    }
+
+    /*public List<Patients> getPatients() {
+        return patients;
+    }*/
 }

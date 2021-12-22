@@ -32,9 +32,13 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Patients p1 = new Patients(1L,"João Gomes","95554-3525", "16/12/1975");
-        Patients p2 = new Patients(2L,"Giva Jones","95554-3525", "16/12/1975");
-        Patients p3 = new Patients(3L,"Joel Silva","95554-3525", "16/12/1975");
+        patientsRepository.deleteAll();
+        hospitalizationHistoryRepository.deleteAll();
+
+        Patients p1 = new Patients(null,"João Gomes","95554-3525", "16/12/1975");
+        Patients p2 = new Patients(null,"Giva Jones","95554-3525", "16/12/1975");
+        Patients p3 = new Patients(null,"Joel Silva","95554-3525", "16/12/1975");
+        patientsRepository.saveAll(Arrays.asList(p1,p2,p3));
 
         Doctors d1 = new Doctors(1111L, "José de Carvalho", 1, "Ortopedista", null);
         Doctors d2 = new Doctors(2222L, "Renan Santos", 2, "Cardiologista", null);
@@ -45,34 +49,63 @@ public class TestConfig implements CommandLineRunner {
         doctorsRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5));
 
 
-        
 
-        HospitalizationHistory h1 = new HospitalizationHistory("02/11/2016 - 18:40","05/11/2016 - 11:35",
-                "Flu problem", 5555L,1L);
+
+        /*HospitalizationHistory h1 = new HospitalizationHistory("02/11/2016 - 18:40","05/11/2016 - 11:35",
+                "Flu problem", 5555L, p1.getIdPatient());
 
         HospitalizationHistory h2 = new HospitalizationHistory("29/09/2011 - 19:40","05/10/2011 - 11:35",
-                "Heart problem", 2222L,1L);
+                "Heart problem", 2222L,p1.getIdPatient());
 
         HospitalizationHistory h3 = new HospitalizationHistory("25/3/2010 - 19:50","28/3/2010 - 15:35",
-                "Fractured bone", 1111L,1L);
+                "Fractured bone", 1111L,p1.getIdPatient());
+
 
         HospitalizationHistory h4 = new HospitalizationHistory("10/11/2016 - 18:40", "10/11/2016 - 20:35",
-                "Flu problem", 5555L, 2L);
+                "Flu problem", 5555L,p2.getIdPatient());
 
         HospitalizationHistory h5 = new HospitalizationHistory("20/04/2015 - 17:40", "28/04/2015 - 15:40",
-                "Heart problem", 2222L,2L);
+                "Heart problem", 2222L,p2.getIdPatient());
 
         HospitalizationHistory h6 = new HospitalizationHistory("16/07/2018 - 13:50", "20/07/2018 - 18:35",
-                "Flu problem", 5555L,3L);
+                "Flu problem", 5555L,p3.getIdPatient());*/
 
-        hospitalizationHistoryRepository.saveAll(Arrays.asList(h1,h2,h3,h4,h5,h6));
+
+        HospitalizationHistory h1 = new HospitalizationHistory(p1.getIdPatient(),"02/11/2016 - 18:40","05/11/2016 - 11:35",
+                "Flu problem", Arrays.asList(d5));
+        HospitalizationHistory h2 = new HospitalizationHistory(p1.getIdPatient(),"29/09/2011 - 19:40","05/10/2011 - 11:35",
+                "Heart problem", Arrays.asList(d2));
+
+
+
+        hospitalizationHistoryRepository.saveAll(Arrays.asList(h1,h2));
+
+
+
+
+
+
 
 
 
         p1.getHospitalizationHistoryList().add(h1);
         p1.getHospitalizationHistoryList().add(h2);
+
+
+        /*p1.getHospitalizationHistoryList().add(h2);
         p1.getHospitalizationHistoryList().add(h3);
-        patientsRepository.saveAll(Arrays.asList(p1,p2,p3));
+        hospitalizationHistoryRepository.saveAll(Arrays.asList(h1,h2,h3));
+
+
+        p2.getHospitalizationHistoryList().add(h4);
+        p2.getHospitalizationHistoryList().add(h5);
+
+
+        p3.getHospitalizationHistoryList().add(h6);*/
+
+
+
+
 
 
 
@@ -99,7 +132,7 @@ public class TestConfig implements CommandLineRunner {
 
 
 
-        hospitalizationHistoryRepository.saveAll(Arrays.asList(h1,h2,h3,h4,h5,h6));
+        hospitalizationHistoryRepository.saveAll(Arrays.asList(h1));
         patientsRepository.saveAll(List.of(p1,p2,p3));
 
 

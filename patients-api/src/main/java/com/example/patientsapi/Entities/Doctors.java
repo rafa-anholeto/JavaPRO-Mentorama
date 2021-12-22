@@ -12,13 +12,14 @@ public class Doctors implements Serializable {
     @Id
     @JoinColumn(name = "responseDoctor")
     private Long idMatricula;
+
+
     private String nomeMedico;
     private Integer department;
     private String cargo;
     private String phone;
 
-    @ManyToMany(mappedBy = "doctorsList")
-    private List<HospitalizationHistory> hospitalizationHistoryList = new ArrayList<>();
+
 
     public Doctors() {
     }
