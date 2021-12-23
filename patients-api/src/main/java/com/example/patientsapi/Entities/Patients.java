@@ -14,8 +14,8 @@ public class Patients {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "hospitalization_history_idPatients")
-    private Long idPatient;
+    @JoinColumn(name = "hospitalization_history_patientId")
+    private Long patientId;
     private String name;
     private String phone;
     private String birthDate;
@@ -27,19 +27,19 @@ public class Patients {
     public Patients() {
     }
 
-    public Patients(Long idPatient, String name, String phone, String birthDate) {
-        this.idPatient = idPatient;
+    public Patients(Long patientId, String name, String phone, String birthDate) {
+        this.patientId = patientId;
         this.name = name;
         this.phone = phone;
         this.birthDate = birthDate;
     }
 
-    public Long getIdPatient() {
-        return idPatient;
+    public Long getpatientId() {
+        return patientId;
     }
 
-    public void setIdPatient(Long idPatient) {
-        this.idPatient = idPatient;
+    public void setpatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public String getName() {
@@ -80,11 +80,11 @@ public class Patients {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Patients patients = (Patients) o;
-        return idPatient.equals(patients.idPatient);
+        return patientId.equals(patients.patientId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPatient);
+        return Objects.hash(patientId);
     }
 }

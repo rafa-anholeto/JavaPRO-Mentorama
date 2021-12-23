@@ -12,9 +12,11 @@ import java.util.List;
 @Table(name = "hospitalization_history")
 public class HospitalizationHistory implements Serializable {
 
+
+
     @Id
-    @JoinColumn(name = "idPatient")
-    private Long idPatients;
+    @JoinColumn(name = "patientId")
+    private Long patientId;
 
     private String dateAndEntryPatientHour;
     private String dateAndExitPatientHour;
@@ -22,33 +24,44 @@ public class HospitalizationHistory implements Serializable {
 
     //private Long responseDoctor;
 
+
+
     @ManyToMany
     @JoinColumn(name = "doctors")
     private List<Doctors> responseDoctor = new ArrayList<>();
 
-
-
-
-    @ManyToMany
-    @JoinColumn(name = "hospitalization_history_idPatients")
-    private List<Patients> patients = new ArrayList<>();
-
-
     /*@ManyToMany
-    @JoinColumn(name = "id")
-    private List<Patients> patientsList;*/
+    @JoinColumn(name = "hospitalization_history_patientId")
+    private List<Patients> patients = new ArrayList<>();*/
+
+
+
+
+
+
+
 
     public HospitalizationHistory() {
     }
 
-    public HospitalizationHistory(Long idPatients, String dateAndEntryPatientHour, String dateAndExitPatientHour, String description,
+    public HospitalizationHistory(Long patientId, String dateAndEntryPatientHour, String dateAndExitPatientHour, String description,
                                   List<Doctors> responseDoctor) {
-        this.idPatients = idPatients;
+
+        this.patientId = patientId;
         this.dateAndEntryPatientHour = dateAndEntryPatientHour;
         this.dateAndExitPatientHour = dateAndExitPatientHour;
         this.description = description;
         this.responseDoctor = responseDoctor;
 
+
+    }
+
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public String getDateAndEntryPatientHour() {
@@ -75,28 +88,14 @@ public class HospitalizationHistory implements Serializable {
         this.description = description;
     }
 
-    /*public Long getResponseDoctor() {
-        return responseDoctor;
-    }
-
-    public void setResponseDoctor(Long responseDoctor) {
-        this.responseDoctor = responseDoctor;
-    }*/
-
-
-    public Long getIdPatients() {
-        return this.idPatients;
-    }
-
-    public void setIdPatients(Long idPatients) {
-        this.idPatients = idPatients;
-    }
-
     public List<Doctors> getResponseDoctor() {
         return responseDoctor;
     }
 
+
     /*public List<Patients> getPatients() {
         return patients;
     }*/
+
+
 }

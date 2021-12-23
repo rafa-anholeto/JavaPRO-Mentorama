@@ -1,9 +1,10 @@
 package com.example.patientsapi.Entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "doctors")
@@ -11,10 +12,10 @@ public class Doctors implements Serializable {
 
     @Id
     @JoinColumn(name = "responseDoctor")
-    private Long idMatricula;
+    private Long doctorId;
 
 
-    private String nomeMedico;
+    private String medicName;
     private Integer department;
     private String cargo;
     private String phone;
@@ -24,28 +25,28 @@ public class Doctors implements Serializable {
     public Doctors() {
     }
 
-    public Doctors(Long idMatricula, String nomeMedico, Integer department, String cargo, String phone) {
-        this.idMatricula = idMatricula;
-        this.nomeMedico = nomeMedico;
+    public Doctors(Long doctorId, String medicName, Integer department, String cargo, String phone) {
+        this.doctorId = doctorId;
+        this.medicName = medicName;
         this.department = department;
         this.cargo = cargo;
         this.phone = phone;
     }
 
-    public Long getIdMatricula() {
-        return idMatricula;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public void setIdMatricula(Long idMatricula) {
-        this.idMatricula = idMatricula;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public String getNomeMedico() {
-        return nomeMedico;
+    public String getMedicName() {
+        return medicName;
     }
 
-    public void setNomeMedico(String nomeMedico) {
-        this.nomeMedico = nomeMedico;
+    public void setMedicName(String medicName) {
+        this.medicName = medicName;
     }
 
     public Integer getDepartment() {

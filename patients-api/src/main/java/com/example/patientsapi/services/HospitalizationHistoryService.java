@@ -1,9 +1,7 @@
 package com.example.patientsapi.services;
 
 import com.example.patientsapi.Entities.HospitalizationHistory;
-import com.example.patientsapi.Entities.Patients;
 import com.example.patientsapi.Repositories.HospitalizationHistoryRepository;
-import com.example.patientsapi.Repositories.PatientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
