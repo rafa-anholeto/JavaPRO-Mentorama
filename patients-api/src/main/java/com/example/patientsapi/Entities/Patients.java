@@ -1,7 +1,5 @@
 package com.example.patientsapi.Entities;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,11 +8,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "patients")
-public class Patients {
+public class Patients implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "hospitalization_history_patientId")
+
+    //@JoinColumn(name = "hospitalization_history_patientId")
     private Long patientId;
     private String name;
     private String phone;

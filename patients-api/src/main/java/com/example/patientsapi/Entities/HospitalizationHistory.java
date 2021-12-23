@@ -13,11 +13,9 @@ import java.util.List;
 public class HospitalizationHistory implements Serializable {
 
 
-
-    @Id
-    @JoinColumn(name = "patientId")
+    
     private Long patientId;
-
+    @Id
     private String dateAndEntryPatientHour;
     private String dateAndExitPatientHour;
     private String description;
@@ -30,9 +28,8 @@ public class HospitalizationHistory implements Serializable {
     @JoinColumn(name = "doctors")
     private List<Doctors> responseDoctor = new ArrayList<>();
 
-    /*@ManyToMany
-    @JoinColumn(name = "hospitalization_history_patientId")
-    private List<Patients> patients = new ArrayList<>();*/
+    @ManyToMany
+    private List<Patients> patients = new ArrayList<>();
 
 
 

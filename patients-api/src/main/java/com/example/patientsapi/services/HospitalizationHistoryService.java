@@ -16,4 +16,25 @@ public class HospitalizationHistoryService {
     public List<HospitalizationHistory> findAll(){
         return hospitalizationHistoryRepository.findAll();
     }
+
+    public HospitalizationHistory create(HospitalizationHistory hospitalizationHistory){
+        return hospitalizationHistoryRepository.save(hospitalizationHistory);
+    }
+
+    public HospitalizationHistory update(Long id, HospitalizationHistory hospitalizationHistory){
+
+        return hospitalizationHistoryRepository.save(hospitalizationHistory);
+
+    }
+
+    public void updateData(HospitalizationHistory entity, HospitalizationHistory hospitalizationHistory){
+        entity.setPatientId(hospitalizationHistory.getPatientId());
+        entity.setDateAndEntryPatientHour(hospitalizationHistory.getDateAndEntryPatientHour());
+        entity.setDateAndExitPatientHour(hospitalizationHistory.getDateAndExitPatientHour());
+        entity.setDescription(hospitalizationHistory.getDescription());
+    }
+
+    public void delete(Long id){
+        hospitalizationHistoryRepository.deleteById(id);
+    }
 }
