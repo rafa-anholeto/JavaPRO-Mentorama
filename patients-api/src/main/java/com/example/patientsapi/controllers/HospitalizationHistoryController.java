@@ -1,6 +1,7 @@
 package com.example.patientsapi.controllers;
 
 import com.example.patientsapi.Entities.HospitalizationHistory;
+import com.example.patientsapi.requests.HospitalizationHistoryPostRequestBody;
 import com.example.patientsapi.services.HospitalizationHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,16 +21,21 @@ public class HospitalizationHistoryController {
     public ResponseEntity<List<HospitalizationHistory>> findAll(){
         return new ResponseEntity<>(hospitalizationHistoryService.findAll(), HttpStatus.OK);
     }
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<HospitalizationHistory> findById(@PathVariable("id") Long id){
+        return new ResponseEntity(hospitalizationHistoryService.findById(id), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<HospitalizationHistory> create(@RequestBody HospitalizationHistory hospitalizationHistory){
-        HospitalizationHistory hosp = hospitalizationHistoryService.create(hospitalizationHistory);
-        return new ResponseEntity<>(hosp, HttpStatus.CREATED);
+        HospitalizationHistory obj = hospitalizationHistoryService.create(hospitalizationHistory);
+        return new ResponseEntity<>(obj, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<HospitalizationHistory> update(@PathVariable Long id, @RequestBody HospitalizationHistory hospitalizationHistory){
-        return new ResponseEntity<>(hospitalizationHistoryService.update(id, hospitalizationHistory), HttpStatus.NO_CONTENT);
+    @PutMapping
+    public ResponseEntity<HospitalizationHistory> update(@RequestBody HospitalizationHistory hospitalizationHistory){
+        HospitalizationHistory h1 = hospitalizationHistoryService.update(hospitalizationHistory);
+        return new ResponseEntity<>(h1, HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
