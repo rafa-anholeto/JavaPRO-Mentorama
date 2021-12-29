@@ -1,7 +1,6 @@
 package com.example.patientsapi.controllers;
 
 import com.example.patientsapi.Entities.HospitalizationHistory;
-import com.example.patientsapi.requests.HospitalizationHistoryPostRequestBody;
 import com.example.patientsapi.services.HospitalizationHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
