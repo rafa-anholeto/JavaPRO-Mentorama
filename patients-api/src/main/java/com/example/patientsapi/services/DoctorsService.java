@@ -17,18 +17,6 @@ public class DoctorsService {
         return doctorsRepository.findAll();
     }
 
-    public Doctors create(Doctors doctors){
-        return doctorsRepository.save(doctors);
-    }
-
-    public Doctors update(Doctors doctors){
-        return doctorsRepository.save(doctors);
-    }
-
-    public void delete(Long id){
-        doctorsRepository.deleteById(id);
-    }
-
 
 
 }

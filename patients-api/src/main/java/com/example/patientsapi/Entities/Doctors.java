@@ -1,19 +1,17 @@
 package com.example.patientsapi.Entities;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "doctors")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Doctors implements Serializable {
 
     @Id
+    @JoinColumn(name = "responseDoctor")
     private Long doctorId;
 
 
@@ -21,10 +19,6 @@ public class Doctors implements Serializable {
     private Integer department;
     private String cargo;
     private String phone;
-
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "responseDoctor", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<HospitalizationHistory> hospitalizationHistory = new ArrayList<>();
 
 
 
@@ -79,12 +73,5 @@ public class Doctors implements Serializable {
         this.phone = phone;
     }
 
-    public List<HospitalizationHistory> getHospitalizationHistory() {
-        return hospitalizationHistory;
-    }
-
-    public void setHospitalizationHistory(List<HospitalizationHistory> hospitalizationHistory) {
-        this.hospitalizationHistory = hospitalizationHistory;
-    }
 
 }

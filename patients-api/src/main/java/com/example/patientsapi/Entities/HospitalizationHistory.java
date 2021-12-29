@@ -1,6 +1,7 @@
 package com.example.patientsapi.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,33 +9,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "hospitalization_history")
 public class HospitalizationHistory implements Serializable {
+
+
+    
+    private Long patientId;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    private Patients patient;
-
     private String dateAndEntryPatientHour;
     private String dateAndExitPatientHour;
     private String description;
+
+    //private Long responseDoctor;
+
+
 
     @ManyToMany
     @JoinColumn(name = "doctors")
     private List<Doctors> responseDoctor = new ArrayList<>();
 
+    @ManyToMany
+    private List<Patients> patients = new ArrayList<>();
+
+
+
+
+
+
+
+
     public HospitalizationHistory() {
     }
 
-    public HospitalizationHistory(Long id, Patients patient, String dateAndEntryPatientHour, String dateAndExitPatientHour, String description,
+    public HospitalizationHistory(Long patientId, String dateAndEntryPatientHour, String dateAndExitPatientHour, String description,
                                   List<Doctors> responseDoctor) {
 
-        this.id = id;
-        this.patient = patient;
+        this.patientId = patientId;
         this.dateAndEntryPatientHour = dateAndEntryPatientHour;
         this.dateAndExitPatientHour = dateAndExitPatientHour;
         this.description = description;
@@ -43,20 +53,12 @@ public class HospitalizationHistory implements Serializable {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Patients getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patients patient) {
-        this.patient = patient;
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public String getDateAndEntryPatientHour() {
@@ -87,7 +89,10 @@ public class HospitalizationHistory implements Serializable {
         return responseDoctor;
     }
 
-    public void setResponseDoctor(List<Doctors> responseDoctor) {
-        this.responseDoctor = responseDoctor;
-    }
+
+    /*public List<Patients> getPatients() {
+        return patients;
+    }*/
+
+
 }
