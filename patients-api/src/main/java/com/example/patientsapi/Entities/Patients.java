@@ -1,4 +1,10 @@
+
+
 package com.example.patientsapi.Entities;
+
+import com.example.patientsapi.Entities.HospitalizationHistory;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,37 +14,36 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "patients")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Patients implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    //@JoinColumn(name = "hospitalization_history_patientId")
-    private Long patientId;
+    private Long id;
     private String name;
     private String phone;
     private String birthDate;
 
-    @ManyToMany
-    @JoinTable(name = "patients_hospitalization_history")
-    private List<HospitalizationHistory> hospitalizationHistoryList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<HospitalizationHistory> hospitalizationHistory = new ArrayList<>();
 
     public Patients() {
     }
 
     public Patients(Long patientId, String name, String phone, String birthDate) {
-        this.patientId = patientId;
+        this.id = patientId;
         this.name = name;
         this.phone = phone;
         this.birthDate = birthDate;
     }
 
-    public Long getpatientId() {
-        return patientId;
+    public Long getId() {
+        return id;
     }
 
-    public void setpatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setId(Long patientId) {
+        this.id = patientId;
     }
 
     public String getName() {
@@ -65,25 +70,26 @@ public class Patients implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public List<HospitalizationHistory> getHospitalizationHistoryList() {
-
-        return hospitalizationHistoryList;
+    public List<HospitalizationHistory> getHospitalizationHistory() {
+        return hospitalizationHistory;
     }
 
-    public void setHospitalizationHistoryList(List<HospitalizationHistory> hospitalizationHistoryList) {
-        this.hospitalizationHistoryList = hospitalizationHistoryList;
+    public void setHospitalizationHistory(List<HospitalizationHistory> hospitalizationHistoryList) {
+        this.hospitalizationHistory = hospitalizationHistoryList;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Patients patients = (Patients) o;
-        return patientId.equals(patients.patientId);
+        return id.equals(patients.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(patientId);
+        return Objects.hash(id);
     }
 }
