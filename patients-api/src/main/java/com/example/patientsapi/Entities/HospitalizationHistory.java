@@ -6,10 +6,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "hospitalization_history")
+@Table(name = "tb_hospitalization_history")
 public class HospitalizationHistory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,7 @@ public class HospitalizationHistory implements Serializable {
     private String description;
 
     @ManyToMany
-    @JoinColumn(name = "doctors")
+    @JoinColumn(name = "doctors_id")
     private List<Doctors> responseDoctor = new ArrayList<>();
 
     public HospitalizationHistory() {
@@ -90,4 +91,6 @@ public class HospitalizationHistory implements Serializable {
     public void setResponseDoctor(List<Doctors> responseDoctor) {
         this.responseDoctor = responseDoctor;
     }
+
+
 }

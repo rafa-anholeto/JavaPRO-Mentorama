@@ -21,6 +21,11 @@ public class DoctorsController {
         return new ResponseEntity<>(doctorsService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<List<Doctors>> findDoctorsPerDepartment(){
+        return new ResponseEntity<>(doctorsService.findDoctorsPerDepartment(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Doctors> create(@RequestBody Doctors doctors){
         return new ResponseEntity<>(doctorsService.create(doctors), HttpStatus.CREATED);

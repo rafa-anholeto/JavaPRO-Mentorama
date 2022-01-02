@@ -17,6 +17,10 @@ public class DoctorsService {
         return doctorsRepository.findAll();
     }
 
+    public List<Doctors> findDoctorsPerDepartment(){
+        return doctorsRepository.findDoctorsPerDepartment();
+    }
+
     public Doctors create(Doctors doctors){
         return doctorsRepository.save(doctors);
     }
