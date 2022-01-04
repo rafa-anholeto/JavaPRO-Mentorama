@@ -42,6 +42,7 @@ public class Doctors implements Serializable {
         this.id = id;
     }
 
+
     public String getMedicName() {
         return medicName;
     }

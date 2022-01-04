@@ -18,7 +18,7 @@ public class DoctorsService {
     }
 
     public List<Doctors> findDoctorsPerDepartment(){
-        return doctorsRepository.findDoctorsPerDepartment();
+        return doctorsRepository.findDoctorsByDepartment();
     }
 
     public Doctors create(Doctors doctors){

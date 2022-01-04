@@ -23,7 +23,8 @@ public class DoctorsController {
 
     @GetMapping("/count")
     public ResponseEntity<List<Doctors>> findDoctorsPerDepartment(){
-        return new ResponseEntity<>(doctorsService.findDoctorsPerDepartment(), HttpStatus.OK);
+        List<Doctors> list = doctorsService.findDoctorsPerDepartment();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping
