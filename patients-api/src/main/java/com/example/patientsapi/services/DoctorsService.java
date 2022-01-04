@@ -2,6 +2,7 @@ package com.example.patientsapi.services;
 
 import com.example.patientsapi.Entities.Doctors;
 import com.example.patientsapi.Repositories.DoctorsRepository;
+import com.example.patientsapi.dto.DoctorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,10 @@ public class DoctorsService {
 
     public void delete(Long id){
         doctorsRepository.deleteById(id);
+    }
+
+    public Doctors fromDTO(DoctorsDTO objDto){
+        return new Doctors(objDto.getId(),objDto.getMedicName(), objDto.getDepartment(), objDto.getCargo(), objDto.getPhone());
     }
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface DoctorsRepository extends JpaRepository<Doctors, Long> {
 
-    @Query(value = "SELECT department, count(department) AS department_quantity FROM tb_doctors GROUP BY department ORDER BY department_quantity desc ",
+    @Query(value = "SELECT department, count(department) as department_quantity FROM tb_doctors group by department order by department_quantity desc ",
             nativeQuery = true)
     List<Doctors> findDoctorsByDepartment();
 }

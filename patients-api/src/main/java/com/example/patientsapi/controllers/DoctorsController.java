@@ -1,6 +1,7 @@
 package com.example.patientsapi.controllers;
 
 import com.example.patientsapi.Entities.Doctors;
+import com.example.patientsapi.dto.DoctorsDTO;
 import com.example.patientsapi.services.DoctorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/doctors")
@@ -22,9 +24,10 @@ public class DoctorsController {
     }
 
     @GetMapping("/count")
-    public ResponseEntity<List<Doctors>> findDoctorsPerDepartment(){
+    public ResponseEntity<List<DoctorsDTO>> findDoctorsPerDepartment(){
         List<Doctors> list = doctorsService.findDoctorsPerDepartment();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        List<DoctorsDTO> listDto = list.stream().map(x -> new DoctorsDTO(x)).collect(Collectors.toList());
+        return new ResponseEntity(listDto, HttpStatus.OK);
     }
 
     @PostMapping
