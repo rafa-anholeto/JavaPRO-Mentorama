@@ -24,22 +24,21 @@ public class HospitalizationHistory implements Serializable {
     private String dateAndExitPatientHour;
     private String description;
 
-    @ManyToMany
-    @JoinColumn(name = "doctors_id")
-    private List<Doctors> responseDoctor = new ArrayList<>();
+    @OneToMany
+    private List<Doctors> doctor = new ArrayList<>();
 
     public HospitalizationHistory() {
     }
 
     public HospitalizationHistory(Long id, Patients patient, String dateAndEntryPatientHour, String dateAndExitPatientHour, String description,
-                                  List<Doctors> responseDoctor) {
+                                  List<Doctors> doctor) {
 
         this.id = id;
         this.patient = patient;
         this.dateAndEntryPatientHour = dateAndEntryPatientHour;
         this.dateAndExitPatientHour = dateAndExitPatientHour;
         this.description = description;
-        this.responseDoctor = responseDoctor;
+        this.doctor = doctor;
 
 
     }
@@ -84,12 +83,12 @@ public class HospitalizationHistory implements Serializable {
         this.description = description;
     }
 
-    public List<Doctors> getResponseDoctor() {
-        return responseDoctor;
+    public List<Doctors> getDoctor() {
+        return doctor;
     }
 
-    public void setResponseDoctor(List<Doctors> responseDoctor) {
-        this.responseDoctor = responseDoctor;
+    public void setDoctor(List<Doctors> doctor) {
+        this.doctor = doctor;
     }
 
 

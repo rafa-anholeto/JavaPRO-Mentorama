@@ -6,7 +6,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_doctors")
-//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Doctors implements Serializable {
 
     @Id
@@ -17,7 +16,6 @@ public class Doctors implements Serializable {
     private Integer department;
     private String cargo;
     private String phone;
-
 
 
     public Doctors() {
@@ -31,7 +29,6 @@ public class Doctors implements Serializable {
         this.cargo = cargo;
         this.phone = phone;
     }
-
 
 
     public Long getId() {
@@ -74,7 +71,6 @@ public class Doctors implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
 
     @Override

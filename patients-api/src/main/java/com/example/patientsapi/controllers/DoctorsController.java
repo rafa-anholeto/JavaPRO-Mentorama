@@ -1,7 +1,6 @@
 package com.example.patientsapi.controllers;
 
 import com.example.patientsapi.Entities.Doctors;
-import com.example.patientsapi.dto.DoctorsDTO;
 import com.example.patientsapi.services.DoctorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,11 +23,16 @@ public class DoctorsController {
         return new ResponseEntity<>(doctorsService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/count")
-    public ResponseEntity<List<DoctorsDTO>> findDoctorsPerDepartment(){
+    @GetMapping("/{id}")
+    public ResponseEntity<Doctors> findById(@PathVariable Long id){
+        return new ResponseEntity<>(doctorsService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/countDepartments")
+    public ResponseEntity<List<Doctors>> findDoctorsPerDepartment(){
         List<Doctors> list = doctorsService.findDoctorsPerDepartment();
-        List<DoctorsDTO> listDto = list.stream().map(x -> new DoctorsDTO(x)).collect(Collectors.toList());
-        return new ResponseEntity(listDto, HttpStatus.OK);
+        Map<Object, Long> collect = list.stream().collect(Collectors.groupingBy(x -> x.getDepartment(), Collectors.counting()));
+        return new ResponseEntity("Quantity of doctors by departments: {department number = quantity of doctors} " + collect, HttpStatus.OK);
     }
 
     @PostMapping

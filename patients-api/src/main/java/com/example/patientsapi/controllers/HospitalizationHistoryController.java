@@ -20,6 +20,7 @@ public class HospitalizationHistoryController {
     public ResponseEntity<List<HospitalizationHistory>> findAll(){
         return new ResponseEntity<>(hospitalizationHistoryService.findAll(), HttpStatus.OK);
     }
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<HospitalizationHistory> findById(@PathVariable("id") Long id){
         return new ResponseEntity(hospitalizationHistoryService.findById(id), HttpStatus.OK);

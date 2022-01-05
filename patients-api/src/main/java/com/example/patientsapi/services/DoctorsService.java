@@ -3,10 +3,12 @@ package com.example.patientsapi.services;
 import com.example.patientsapi.Entities.Doctors;
 import com.example.patientsapi.Repositories.DoctorsRepository;
 import com.example.patientsapi.dto.DoctorsDTO;
+import com.example.patientsapi.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DoctorsService {
@@ -18,8 +20,14 @@ public class DoctorsService {
         return doctorsRepository.findAll();
     }
 
+    public Doctors findById(Long id){
+        Optional<Doctors> obj = doctorsRepository.findById(id);
+        return obj.orElseThrow(() -> new ResourceNotFoundException("Id não encontrado"));
+    }
+
     public List<Doctors> findDoctorsPerDepartment(){
-        return doctorsRepository.findDoctorsByDepartment();
+
+        return doctorsRepository.findAll();
     }
 
     public Doctors create(Doctors doctors){
