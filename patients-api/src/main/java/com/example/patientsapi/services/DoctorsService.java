@@ -7,8 +7,11 @@ import com.example.patientsapi.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorsService {
@@ -29,6 +32,7 @@ public class DoctorsService {
 
         return doctorsRepository.findAll();
     }
+
 
     public Doctors create(Doctors doctors){
         return doctorsRepository.save(doctors);

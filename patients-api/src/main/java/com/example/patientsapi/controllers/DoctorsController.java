@@ -32,7 +32,8 @@ public class DoctorsController {
     public ResponseEntity<List<Doctors>> findDoctorsPerDepartment(){
         List<Doctors> list = doctorsService.findDoctorsPerDepartment();
         Map<Object, Long> collect = list.stream().collect(Collectors.groupingBy(x -> x.getDepartment(), Collectors.counting()));
-        return new ResponseEntity("Quantity of doctors by departments: {department number = quantity of doctors} " + collect, HttpStatus.OK);
+
+        return new ResponseEntity(collect, HttpStatus.OK);
     }
 
     @PostMapping
