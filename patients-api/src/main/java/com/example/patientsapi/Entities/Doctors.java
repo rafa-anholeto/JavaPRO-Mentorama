@@ -2,7 +2,11 @@ package com.example.patientsapi.Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_doctors")
@@ -70,6 +74,11 @@ public class Doctors implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Doctors> convertClass(List<Doctors> list){
+        Map<Object, Long> collect = list.stream().collect(Collectors.groupingBy(x -> x.getDepartment(), Collectors.counting()));
+        return list;
     }
 
 
